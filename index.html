@@ -1,33 +1,127 @@
 <!DOCTYPE html>
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>kppcn</title>
 <style>
-:root{--bg:#231f20;--fg:#d2b48c;--ac:#e97451;--dm:#6b4423}
-body{font-family:monospace;background:var(--bg);color:var(--fg);margin:2rem auto;max-width:70ch;padding:0 1rem;line-height:1.4}
-h1,h2{font-size:1em;text-transform:uppercase;color:var(--ac);margin:1.5rem 0 .5rem}
-a{color:inherit;text-decoration:none;border-bottom:1px solid var(--dm)}
-a:hover{color:var(--ac);border-color:var(--ac)}
-ul{list-style:none;padding:0}
-li::before{content:"> ";color:var(--dm)}
-hr{border:0;border-top:1px solid var(--dm);margin:2rem 0}
-footer{color:var(--dm);font-size:.9em}
+:root {
+    --bg: #c0c0c0;
+    --fg: #000000;
+    --link: #0000ee;
+    --vlink: #551a8b;
+    --win-border: #ffffff #808080 #808080 #ffffff;
+}
+body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: "Times New Roman", Times, serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+#bg-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+.matrix-text {
+    position: absolute;
+    font-family: "Courier New", monospace;
+    color: #008000;
+    font-size: 12px;
+    opacity: 0.2;
+}
+main {
+    background: var(--bg);
+    border: 2px solid;
+    border-color: var(--win-border);
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 2px 2px 0 #000;
+}
+h1 {
+    font-size: 2em;
+    margin: 0 0 10px 0;
+    background: #000080;
+    color: #fff;
+    padding: 5px;
+    text-transform: none;
+}
+h2 {
+    font-size: 1.2em;
+    text-decoration: underline;
+    margin-top: 20px;
+}
+a {
+    color: var(--link);
+    text-decoration: underline;
+}
+a:visited {
+    color: var(--vlink);
+}
+ul {
+    list-style-type: square;
+    display: inline-block;
+    text-align: left;
+    padding-left: 20px;
+}
+li {
+    margin: 5px 0;
+}
+.blink {
+    text-decoration: blink;
+}
+marquee {
+    border: 1px inset #808080;
+    background: #fff;
+    margin-top: 20px;
+}
 </style>
 </head>
 <body>
-<h1>kppcn</h1>
-<p>aka kp9n, 9cn, q9</p>
-<p>31337 H4XØR!!1!</p>
-<h2>some links</h2>
-<ul>
-<li><a href="https://t.me/trusteduninstaller">telegram</a></li>
-<li><a href="https://youtube.com/@kppcn">youtube</a></li>
-<li><a href="mailto:kappucino@tuta.io">email</a></li>
-<li><a href="https://github.com/kappucin">github</a></li>
-<li><a href="https://gitlab.com/kppcn">gitlab</a></li>
-</ul>
-<footer>
-</footer>
+
+<div id="bg-layer"></div>
+
+<main>
+    <h1>->kppcn<-</h1>
+    <p>aka <span class="blink">kp9n, 9cn, q9</span></p>
+    <p><b>31337 H4XØR!!1!</b></p>
+    
+    <hr>
+    
+    <h2>Some links</h2>
+    <ul>
+        <li><a href="https://t.me/trusteduninstaller">telegram</a></li>
+        <li><a href="https://youtube.com/@kppcn">youtube</a></li>
+        <li><a href="mailto:kappucino@tuta.io">tutanota mael</a></li>
+        <li><a href="https://github.com/kappucin">guthib</a></li>
+        <li><a href="https://codeberg.org/kppcn">codeberg</a></li>
+    </ul>
+
+    <marquee scrollamount="3">BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 or INTERNET EXPLORER 3.0</marquee>
+</main>
+
+<script>
+const bg = document.getElementById('bg-layer');
+
+for (let i = 0; i < 12; i++) {
+    const span = document.createElement('span');
+    span.className = 'matrix-text';
+    span.style.left = Math.random() * 90 + '%';
+    span.style.top = Math.random() * 90 + '%';
+    span.innerText = "101001" + Math.floor(Math.random()*100);
+    bg.appendChild(span);
+}
+</script>
+
 </body>
 </html>
