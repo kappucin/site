@@ -1,129 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>kppcn</title>
-<style>
-:root {
-    --bg: #c0c0c0;
-    --fg: #000000;
-    --link: #0000ee;
-    --vlink: #551a8b;
-    --win-border: #ffffff #808080 #808080 #ffffff;
-}
-body {
-    background-color: var(--bg);
-    color: var(--fg);
-    font-family: "Times New Roman", Times, serif;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    overflow-x: hidden;
-}
-#bg-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-}
-.matrix-text {
-    position: absolute;
-    font-family: "Courier New", monospace;
-    color: #008000;
-    font-size: 12px;
-    opacity: 0.2;
-}
-main {
-    background: var(--bg);
-    border: 2px solid;
-    border-color: var(--win-border);
-    padding: 20px;
-    max-width: 600px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 2px 2px 0 #000;
-}
-h1 {
-    font-size: 2em;
-    margin: 0 0 10px 0;
-    background: #000080;
-    color: #fff;
-    padding: 5px;
-    text-transform: none;
-}
-h2 {
-    font-size: 1.2em;
-    text-decoration: underline;
-    margin-top: 20px;
-}
-a {
-    color: var(--link);
-    text-decoration: underline;
-}
-a:visited {
-    color: var(--vlink);
-}
-ul {
-    list-style-type: square;
-    display: inline-block;
-    text-align: left;
-    padding-left: 20px;
-}
-li {
-    margin: 5px 0;
-}
-.blink {
-    text-decoration: blink;
-}
-marquee {
-    border: 1px inset #808080;
-    background: #fff;
-    margin-top: 20px;
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>kppcn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding:28px 14px;
+      color:#eee;
+      font-family:"Roboto Condensed",Arial,sans-serif;
+      background:#000;
+    }
+    main{width:min(100%,520px)}
+    .bio-card,.buttons-card{
+      width:100%;
+      background:#171717;
+      border:1px solid #2c2c2c;
+      border-radius:18px;
+      box-shadow:0 18px 60px rgba(0,0,0,.55);
+    }
+    .bio-card{
+      padding:28px;
+      text-align:center;
+    }
+    .buttons-card{
+      margin-top:14px;
+      padding:14px;
+    }
+    .links,.buttons{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .links{
+      gap:8px;
+    }
+    .links a{
+      padding:7px 12px;
+      color:#fff;
+      text-decoration:none;
+      background:#242424;
+      border:1px solid #383838;
+      border-radius:999px;
+    }
+    .links a:hover{background:#303030}
+    .buttons{gap:7px}
+    .buttons img{
+      width:88px;
+      height:31px;
+      display:block;
+      border:1px solid #111;
+      image-rendering:pixelated;
+    }
+    @media (max-width:420px){
+      .bio-card{padding:22px 18px}
+    }
+  </style>
 </head>
 <body>
+  <main>
+    <section class="bio-card">
+      <nav class="links" aria-label="social links">
+        <a href="https://t.me/three_one_4">telegram</a>
+        <a href="https://github.com/kappucin">github</a>
+        <a href="https://tangled.org/kppcn.tngl.sh">tangled</a>
+        <a href="https://youtube.com/@kppcn">youtube</a>
+        <a href="mailto:kappucino@tuta.io">email</a>
+      </nav>
+    </section>
 
-<div id="bg-layer"></div>
-
-<main>
-    <h1>->kppcn<-</h1>
-    <p>aka <span class="blink">kp9n, 9cn, q9</span></p>
-    <p><b>31337 H4XØR!!1!</b></p>
-    
-    <hr>
-    
-    <h2>Some links</h2>
-    <ul>
-        <li><a href="https://t.me/trusteduninstaller">telegram</a></li>
-        <li><a href="https://t.me/heroku_mazljz_bot?start=AuroraFeedBack">telegram(помогите у меня спамблок)</a></li>
-        <li><a href="https://youtube.com/@kppcn">youtube</a></li>
-        <li><a href="mailto:kappucino@tuta.io">tutanota mael</a></li>
-        <li><a href="https://tangled.org/kppcn.tngl.sh">танглед</a></li>
-        <li><a href="https://github.com/kappucin">guthib</a></li>
-        <li><a href="https://codeberg.org/kppcn">кодеберх</a></li>
-    </ul>
-
-    <marquee scrollamount="3">BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 or INTERNET EXPLORER 3.0</marquee>
-</main>
-
-<script>
-const bg = document.getElementById('bg-layer');
-
-for (let i = 0; i < 12; i++) {
-    const span = document.createElement('span');
-    span.className = 'matrix-text';
-    span.style.left = Math.random() * 90 + '%';
-    span.style.top = Math.random() * 90 + '%';
-    span.innerText = "101001" + Math.floor(Math.random()*100);
-    bg.appendChild(span);
-}
-</script>
-
+    <section class="buttons-card" aria-label="88x31 buttons">
+      <div class="buttons">
+        <a target="_blank" rel="noreferrer"><img src="https://atapi.space/assets/img/buttons/sucks.gif" loading="lazy" width="88" height="31" alt="sucks"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://cyber.dabamos.de/88x31/redhat1.gif" loading="lazy" width="88" height="31" alt="rh"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://atapi.space/assets/img/buttons/steam.gif" loading="lazy" width="88" height="31" alt="steam"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://atapi.space/assets/img/buttons/nyancat.gif" loading="lazy" width="88" height="31" alt="nyancat"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://atapi.space/assets/img/buttons/freakmode.gif" loading="lazy" width="88" height="31" alt="freakmode"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://atapi.space/assets/img/buttons/notepad.gif" loading="lazy" width="88" height="31" alt="notepad"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://atapi.space/assets/img/buttons/source.png" loading="lazy" width="88" height="31" alt="idk"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://cyber.dabamos.de/88x31/firefox3.gif" loading="lazy" width="88" height="31" alt="firefox"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://v3.mystie.dev/static/images/ublock.png" loading="lazy" width="88" height="31" alt="ublock"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://cyber.dabamos.de/88x31/minecraft.gif" loading="lazy" width="88" height="31" alt="minecraft"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://cyber.dabamos.de/88x31/newgrounds.gif" loading="lazy" width="88" height="31" alt="ng"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://cyber.dabamos.de/88x31/wii.gif" loading="lazy" width="88" height="31" alt="wii"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://cyber.dabamos.de/88x31/github.gif" loading="lazy" width="88" height="31" alt="gh"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://atapi.space/assets/img/buttons/jellyfin.png" loading="lazy" width="88" height="31" alt="jellyfin"></a>
+        <a target="_blank" rel="noreferrer"><img src="https://cyber.dabamos.de/88x31/ralseismokingadart.gif" loading="lazy" width="88" height="31" alt="ralseismokingadart"></a>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
