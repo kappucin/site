@@ -1,87 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>kppcn</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      padding:28px 14px;
-      color:#eee;
-      font-family:"Roboto Condensed",Arial,sans-serif;
-      background:#000;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    main{width:min(100%,520px)}
-    .bio-card,.buttons-card{
-      width:100%;
-      background:#171717;
-      border:1px solid #2c2c2c;
-      border-radius:18px;
-      box-shadow:0 18px 60px rgba(0,0,0,.55);
+    
+    body {
+      background: #09090b;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      font-family: "Roboto Condensed", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
     }
-    .bio-card{
-      padding:28px;
-      text-align:center;
+
+    .rain-drop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-decoration: none;
+      color: #ffffff;
+      white-space: nowrap;
+      user-select: none;
+      will-change: transform;
+      transition: color 0.15s ease, opacity 0.15s ease;
     }
-    .buttons-card{
-      margin-top:14px;
-      padding:14px;
-    }
-    .links,.buttons{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    .links{
-      gap:8px;
-    }
-    .links a{
-      padding:7px 12px;
-      color:#fff;
-      text-decoration:none;
-      background:#242424;
-      border:1px solid #383838;
-      border-radius:999px;
-    }
-    .links a:hover{background:#303030}
-    .buttons{gap:7px}
-    .buttons img{
-      width:88px;
-      height:31px;
-      display:block;
-      border:1px solid #111;
-      image-rendering:pixelated;
-    }
-    @media (max-width:420px){
-      .bio-card{padding:22px 18px}
+
+    .rain-drop:hover {
+      color: #00ffd2 !important;
+      opacity: 1 !important;
+      font-weight: 700;
     }
   </style>
 </head>
 <body>
-  <main>
-    <section class="bio-card">
-      <nav class="links" aria-label="social links">
-        <a href="https://t.me/three_one_4">telegram</a>
-        <a href="https://github.com/kappucin">github</a>
-        <a href="https://tangled.org/ima.kppcn.cyou">tangled</a>
-        <a href="https://youtube.com/@kppcn">youtube</a>
-        <a href="mailto:kappucino@tuta.io">email</a>
-      </nav>
-    </section>
 
-    <section class="buttons-card" aria-label="88x31 buttons">
-      <div class="buttons">
-        <a target="_blank" rel="noreferrer"><img src="https://atapi.space/assets/img/buttons/sucks.gif" loading="lazy" width="88" height="31" alt="sucks"></a>
-      </div>
-    </section>
-  </main>
+  <script>
+    const linksData = [
+      { text: 'telegram', url: 'https://t.me/three_one_4' },
+      { text: 'github', url: 'https://github.com/kappucin' },
+      { text: 'tangled', url: 'https://tangled.org/ima.kppcn.cyou' },
+      { text: 'youtube', url: 'https://youtube.com/@kppcn' },
+      { text: 'email', url: 'mailto:kappucino@tuta.io' }
+    ];
+
+    const totalDrops = 40;
+    const dropsArray = [];
+
+    for (let i = 0; i < totalDrops; i++) {
+      const data = linksData[Math.floor(Math.random() * linksData.length)];
+      const a = document.createElement('a');
+      
+      a.href = data.url;
+      a.textContent = data.text;
+      a.className = 'rain-drop';
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      
+      const size = 13 + Math.random() * 15;
+      a.style.fontSize = size + 'px';
+      a.style.opacity = 0.07 + (size - 13) / 15 * 0.45;
+      document.body.appendChild(a);
+      dropsArray.push({
+        element: a,
+        x: Math.random() * (window.innerWidth - 120),
+        y: Math.random() * (window.innerHeight + 200) - 100,
+        speed: 1.5 + (size - 13) / 15 * 2.5
+      });
+    }
+    function animate() {
+      const screenHeight = window.innerHeight;
+      const screenWidth = window.innerWidth;
+      for (let i = 0; i < totalDrops; i++) {
+        const drop = dropsArray[i];
+        drop.y += drop.speed;
+        if (drop.y > screenHeight + 40) {
+          drop.y = -40;
+          drop.x = Math.random() * (screenWidth - 120);
+          const nextData = linksData[Math.floor(Math.random() * linksData.length)];
+          drop.element.href = nextData.url;
+          drop.element.textContent = nextData.text;
+        }
+        drop.element.style.transform = 'translate3d(' + drop.x + 'px, ' + drop.y + 'px, 0)';
+      }
+
+      requestAnimationFrame(animate);
+    }
+    window.addEventListener('resize', () => {
+      for (let i = 0; i < totalDrops; i++) {
+        if (dropsArray[i].x > window.innerWidth - 120) {
+          dropsArray[i].x = Math.random() * (window.innerWidth - 120);
+        }
+      }
+    });
+    animate();
+  </script>
 </body>
 </html>
