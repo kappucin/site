@@ -1,4 +1,5 @@
 <div align="center">
+<img src="/assets/screenshot.png" alt="screenshot" width="500">
 
 # kppcn.cyou
 
