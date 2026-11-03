@@ -1,0 +1,23 @@
+server {
+  port "4001"
+  static-dir "web/static"
+  db-path "data/kppcn.db"
+  settings-path "data/settings.json"
+}
+admin {
+  username "change-me"
+  password "change-me"
+}
+captcha {
+  enabled true
+  base_difficulty 16
+  ttl 300
+}
+security {
+  voter-hash-salt "random-hex-string"
+  enable-hsts false
+}
+account {
+  secret "random-hex-string"
+  secure-cookies false
+}

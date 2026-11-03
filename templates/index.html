@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <script src="/js/theme.js?v={{ theme_ver }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>kppcn</title>
+    <meta name="description" content="kppcn bio">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#e7e7eb" media="(prefers-color-scheme: light)">
+    <meta name="color-scheme" content="light dark">
+    <meta name="format-detection" content="telephone=no">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% if !og_title.is_empty() %}{{ og_title }}{% else %}kppcn{% endif %}">
+    <meta property="og:description" content="{% if !og_description.is_empty() %}{{ og_description }}{% else %}kppcn bio{% endif %}">
+    <meta property="og:image" content="https://kppcn.cyou/images/cat.webp">
+    {% if !og_url.is_empty() %}<meta property="og:url" content="{{ og_url }}">{% endif %}
+    <link rel="icon" href="/favicon.ico">
+    <link rel="preload" href="/fonts/material-symbols-2.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/archivo-normal-400-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/playfair-display-normal-500-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/pangolin-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/fonts/fonts.css?v=7">
+    <link rel="stylesheet" href="/css/style.css?v={{ css_ver }}">
+</head>
+<body>
+
+    <div class="bg-dots-region"></div>
+
+    <header class="topbar" id="mainTopbar">
+        <div class="topbar-inner">
+            <nav class="nav-pills" aria-label="main navigation">
+                <button class="nav-btn{% if active_tab == "home" %} active{% endif %}" data-tab="home">
+                    <span class="ms-icon nav-icon">home</span>
+                    <span>home</span>
+                </button>
+                <button class="nav-btn{% if active_tab == "blog" %} active{% endif %}" data-tab="blog">
+                    <span class="ms-icon nav-icon">newspaper</span>
+                    <span>blog</span>
+                </button>
+                <button class="nav-btn{% if active_tab == "comments" %} active{% endif %}" data-tab="comments">
+                    <span class="ms-icon nav-icon">forum</span>
+                    <span>comments</span>
+                    <span class="page-count" id="pageIndicator">{% if pages > 1 %}{{ page }}/{{ pages }}{% endif %}</span>
+                </button>
+            </nav>
+
+            <button class="icon-btn rimmed-btn" id="settingsBtn" title="appearance settings">
+                <span class="ms-icon">settings</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container" id="mainContainer">
+
+        <section id="tab-home" class="tab-view{% if active_tab == "home" %} active{% endif %}">
+
+            <div class="identity-bento">
+
+                <div class="bento-left-stack">
+                    <div class="bento-widget widget-avatar-tile rimmed-card interactive" id="avatarTile" title="click to morph shape">
+                        <div class="avatar-morph-wrap">
+                            <svg class="avatar-morph-svg" viewBox="0 0 100 100">
+                                <defs>
+                                    <clipPath id="avatarMorphClip">
+                                        <path id="heroMorphPath" class="avatar-morph-path" d="" />
+                                    </clipPath>
+                                </defs>
+                                <image href="/images/cat.webp" width="100" height="100" preserveAspectRatio="xMidYMid slice" clip-path="url(#avatarMorphClip)" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="bento-widget widget-tz-tile rimmed-card">
+                        <div class="widget-meta-dim">
+                            <span class="ms-icon">schedule</span>
+                            <span>timezone</span>
+                        </div>
+                        <div class="tz-value">gmt+4</div>
+                    </div>
+                </div>
+
+                <div class="bento-right-grid">
+                    <div class="bento-widget widget-name-tile rimmed-card interactive" id="nameWidgetTile">
+                        <div class="widget-meta-dim">
+                            <span class="ms-icon">badge</span>
+                            <span>name</span>
+                        </div>
+                    <div class="name-center-stage">
+                        <span class="flex-nickname">kppcn</span>
+                    </div>
+                    <div class="nick-arrows left" aria-hidden="true"></div>
+                    <div class="nick-arrows right" aria-hidden="true"></div>
+                        <span class="passport-langs">ru / en</span>
+                        <span class="passport-aliases">kp9n, q9, 9cn</span>
+                    </div>
+
+                    <div class="bento-widget widget-bday-tile rimmed-card">
+                        <div class="widget-meta-dim">
+                            <span class="ms-icon">cake</span>
+                            <span>bday</span>
+                        </div>
+                        <div class="bday-value">
+                            <span class="bday-day">9</span>
+                            <span class="bday-month">sep</span>
+                        </div>
+                        <div class="bday-ruler" aria-hidden="true"></div>
+                    </div>
+
+                    <div class="bento-widget widget-prns-tile rimmed-card">
+                        <div class="prns-left-col">
+                            <div class="widget-meta-dim">
+                                <span class="ms-icon">wc</span>
+                                <span>prns</span>
+                            </div>
+                        </div>
+                        <div class="prns-value">
+                            <span>he</span><span class="sub">/him</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="contacts-strip" aria-label="contacts">
+                {% for x in contacts %}
+                <a href="{{ x.link }}" class="social-quad-card" data-corner="{{ x.corner }}"{% if x.external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                    <span class="ms-icon social-bleed-icon">{{ x.icon }}</span>
+                    <span class="social-label">{{ x.text }}</span>
+                </a>
+                {% endfor %}
+            </div>
+
+            {% match latest %}{% when Some with (lp) %}
+            <div class="intro-note rimmed-card">some random russian. feel free to leave your comment, also check out my socials or view this site source code on github</div>
+
+            <div class="section-head">
+                <span class="section-title">latest post</span>
+                <button class="section-action" data-goto-tab="blog">
+                    <span>all posts</span>
+                    <span class="ms-icon" style="font-size:15px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <article class="card-latest-post" role="button" tabindex="0" hx-get="/fragments/post/{{ lp.id }}" hx-target="#blogViewSlot" hx-swap="innerHTML">
+                <div class="post-card-top">
+                    <h2 class="post-title">{{ lp.title }}</h2>
+                    <span class="mono-tag" data-date="{{ lp.date }}" data-date-short>{{ lp.date_short }}</span>
+                </div>
+                <div class="post-excerpt">{{ lp.html|safe }}</div>
+                <button class="read-more-btn rimmed-btn">
+                    <span>read full post</span>
+                    <span class="ms-icon" style="font-size:15px;">arrow_outward</span>
+                </button>
+            </article>
+            {% when None %}{% endmatch %}
+
+            {% match featured %}{% when Some with (c) %}
+            <div class="section-head">
+                <span class="section-title">latest comment</span>
+                <button class="section-action" data-goto-tab="comments">
+                    <span>all comments</span>
+                    <span class="ms-icon" style="font-size:15px;">arrow_forward</span>
+                </button>
+            </div>
+
+            <div class="guest-spotlight-stage">
+                <div class="projector-beam"></div>
+                <div class="projector-pool"></div>
+
+                <div id="framedCommentSlot" class="comment-card rimmed-card featured-home-comment">{% include "featured_comment.html" %}</div>
+            </div>
+            {% when None %}{% endmatch %}
+
+            <div class="site-footer">
+                <a class="site-source" href="https://github.com/kappucin/site" target="_blank" rel="noopener noreferrer">this site source ></a>
+            </div>
+
+        </section>
+
+        <section id="tab-blog" class="tab-view{% if active_tab == "blog" %} active{% endif %}">
+            <div id="blogViewSlot">
+                {% match post %}{% when Some with (p) %}
+                {% include "post_detail.html" %}
+                {% when None %}
+                {% include "blog_list.html" %}
+                {% endmatch %}
+            </div>
+        </section>
+
+        <section id="tab-comments" class="tab-view{% if active_tab == "comments" %} active{% endif %}">
+            <div class="comments-toolbar">
+                <div class="search-box" id="commentsSearchBox">
+                    <span class="ms-icon">search</span>
+                    <input type="text" id="commentSearchInput" placeholder="search comments..." autocomplete="off">
+                </div>
+                <button class="toolbar-btn rimmed-btn" id="filtersBtn" title="filters">
+                    <span class="ms-icon">tune</span>
+                </button>
+                <button class="toolbar-btn rimmed-btn primary" id="composerTriggerBtn" title="write comment">
+                    <span class="ms-icon">add</span>
+                </button>
+            </div>
+
+            <div class="comments-feed" id="commentsFeedContainer">{% include "comments_feed.html" %}</div>
+        </section>
+
+    </main>
+
+    <div id="themeModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <h3 class="modal-title">theme</h3>
+            <div class="md3e-segmented-stack" id="themeSegmentedList">
+                <div class="md3e-seg-item" data-theme-opt="system">
+                    <div class="md3e-seg-left">
+                        <span class="ms-icon">routine</span>
+                        <span>system</span>
+                    </div>
+                    <span class="radio-dot"></span>
+                </div>
+                <div class="md3e-seg-item" data-theme-opt="light">
+                    <div class="md3e-seg-left">
+                        <span class="ms-icon">light_mode</span>
+                        <span>light</span>
+                    </div>
+                    <span class="radio-dot"></span>
+                </div>
+                <div class="md3e-seg-item" data-theme-opt="dark">
+                    <div class="md3e-seg-left">
+                        <span class="ms-icon">dark_mode</span>
+                        <span>dark</span>
+                    </div>
+                    <span class="radio-dot"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-pill solid" data-close="themeModal">done</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="filterModal" class="modal-backdrop">
+        <div class="modal-dialog">
+            <h3 class="modal-title">filters</h3>
+            <div class="md3e-segmented-stack">
+                <div class="md3e-seg-item selected" id="sortNewest">
+                    <div class="md3e-seg-left">
+                        <span class="ms-icon">schedule</span>
+                        <span>newest first</span>
+                    </div>
+                    <span class="radio-dot"></span>
+                </div>
+                <div class="md3e-seg-item" id="sortOldest">
+                    <div class="md3e-seg-left">
+                        <span class="ms-icon">history</span>
+                        <span>oldest first</span>
+                    </div>
+                    <span class="radio-dot"></span>
+                </div>
+                <div class="md3e-seg-item selected" id="profanityRow">
+                    <div class="md3e-seg-left">
+                        <span class="ms-icon">explicit</span>
+                        <span>hide profanity</span>
+                    </div>
+                    <div class="adw-switch"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-pill solid" data-close="filterModal">done</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="newCommentModal" class="modal-backdrop">
+        <div class="modal-dialog composer-sheet">
+
+            <div class="composer-topbar">
+                <div class="composer-identity-pill" title="your display name">
+                    <span class="ms-icon">alternate_email</span>
+                    <input type="text" id="newCommentAuthor" placeholder="your name" maxlength="80" autocomplete="off">
+                </div>
+
+                <div class="composer-top-right">
+                    <span class="mono-tag" id="charCounter">0 / 4000</span>
+                    <button type="button" class="composer-close-btn rimmed-btn" data-close="newCommentModal" title="close">
+                        <span class="ms-icon" style="font-size:16px;">close</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="composer-canvas">
+                <textarea
+                    id="newCommentText"
+                    class="editor-textarea"
+                    maxlength="4000"
+                    placeholder="write a message..."
+                ></textarea>
+                <div id="captchaSlot"></div>
+
+                <div id="emojiPopover" class="emoji-popover">
+                    {% for e in emojis %}
+                    <button type="button" class="emoji-item" title=":{{ e.code }}:" data-emoji-code="{{ e.code }}">
+                        <img src="{{ e.url }}" alt=":{{ e.code }}:" loading="lazy">
+                    </button>
+                    {% endfor %}
+                </div>
+
+                <div class="composer-dock">
+                    <div class="composer-tools-left">
+                        <div class="md3e-format-bar">
+                            <button type="button" class="md3e-fmt-btn rimmed-btn" data-format="**" title="bold">
+                                <span class="ms-icon">format_bold</span>
+                            </button>
+                            <button type="button" class="md3e-fmt-btn rimmed-btn" data-format="*" title="italic">
+                                <span class="ms-icon">format_italic</span>
+                            </button>
+                            <button type="button" class="md3e-fmt-btn rimmed-btn" data-format="~~" title="strikethrough">
+                                <span class="ms-icon">strikethrough_s</span>
+                            </button>
+                            <button type="button" class="md3e-fmt-btn rimmed-btn" data-format="`" title="code">
+                                <span class="ms-icon">code</span>
+                            </button>
+                            <button type="button" class="md3e-fmt-btn rimmed-btn" data-format="> " title="quote">
+                                <span class="ms-icon">format_quote</span>
+                            </button>
+                        </div>
+
+                        <button type="button" class="icon-btn rimmed-btn" id="emojiToggleBtn" style="width:32px;height:32px;" title="reactions">
+                            <span class="ms-icon" style="font-size:17px;">sentiment_satisfied</span>
+                        </button>
+                    </div>
+
+                    <button type="button" id="composerSend" class="composer-send-btn" title="send">
+                        <span class="send-label">send</span>
+                        <span class="ms-icon" style="font-size:16px;">arrow_upward</span>
+                        <span class="spinner"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+    <script src="/js/htmx.js?v={{ htmx_ver }}" data-cfasync="false" defer></script>
+    <script src="/js/app.js?v={{ app_ver }}" data-cfasync="false" defer></script>
+</body>
+</html>

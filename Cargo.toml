@@ -1,0 +1,32 @@
+[package]
+name = "kppcn"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "signal", "net", "time"] }
+tower = { version = "0.5", features = ["util"] }
+tower-http = { version = "0.6", features = ["fs"] }
+redb = "2"
+askama = "0.12"
+regex = "1"
+thiserror = "2"
+pulldown-cmark = { version = "0.12", default-features = false, features = ["html"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["raw_value"] }
+kdl = "4"
+hmac = "0.12"
+sha2 = "0.10"
+subtle = "2"
+getrandom = "0.2"
+base64 = "0.22"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"

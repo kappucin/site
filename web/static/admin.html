@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <meta name="robots" content="noindex, nofollow">
+    <title>kppcn admin</title>
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/fonts/fonts.css?v=7">
+    <link rel="stylesheet" href="/css/admin.css?v=3">
+</head>
+<body>
+    <header class="topbar">
+        <div class="bar">
+            <div class="brand">kppcn<span>admin</span></div>
+            <a class="site-link rimmed-btn" href="/" target="_blank" rel="noopener noreferrer">open site</a>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="panel">
+            <div class="panel-head">
+                <h2>settings</h2>
+                <button class="btn solid" data-action="save-settings">save</button>
+            </div>
+            <div class="group">
+                <div class="group-head"><h3>contacts</h3><button class="btn small" data-action="add-contact">add</button></div>
+                <div id="contactsList" class="list"></div>
+            </div>
+            <div class="group">
+                <div class="group-head"><h3>emojis</h3><button class="btn small" data-action="add-emoji">add</button></div>
+                <div id="emojisList" class="list"></div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-head"><h2>blog</h2></div>
+            <div class="group">
+                <input type="text" id="blog-title" placeholder="new post title" autocomplete="off">
+                <textarea id="blog-text" placeholder="post text..."></textarea>
+                <div class="row-end"><button class="btn solid" data-action="create-post">publish</button></div>
+            </div>
+            <div id="blogList" class="posts"></div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-head"><h2>comments</h2><button class="btn small" data-action="reload-comments">refresh</button></div>
+            <div id="commentsList" class="comments"></div>
+        </section>
+    </main>
+
+    <div id="toast-container" aria-live="polite"></div>
+    <script src="/js/admin.js?v=4" defer></script>
+</body>
+</html>

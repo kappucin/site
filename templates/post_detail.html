@@ -1,0 +1,15 @@
+<div id="blogDetailView">
+    <div style="margin-bottom:10px;">
+        <button class="read-more-btn rimmed-btn" id="backToBlog">
+            <span class="ms-icon" style="font-size:16px;">west</span>
+            <span>back to blog</span>
+        </button>
+    </div>
+    <article class="newspaper-sheet rimmed-card">
+        <div class="newspaper-reader-head">
+            <h2 class="newspaper-reader-headline">{{ p.title }}</h2>
+            <span class="mono-tag" data-date="{{ p.date }}">{{ p.date_fallback }}</span>
+        </div>
+        <div class="newspaper-reader-content{% if p.dropcap %} has-dropcap{% endif %}">{{ p.html|safe }}</div>
+    </article>
+</div>

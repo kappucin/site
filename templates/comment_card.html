@@ -1,0 +1,18 @@
+{% if c.is_owner %}
+<button type="button" class="comment-delete-btn" data-comment-id="{{ c.id }}" title="delete comment">
+    <span class="ms-icon">delete</span>
+</button>
+{% endif %}
+<div class="comment-body">{{ c.html|safe }}</div>
+<div class="comment-byline-right">
+    <span class="comment-emdash">—</span>
+    <span>{{ c.name }}</span>
+    {% if c.is_admin %}<span class="ms-icon verified-check" title="verified">check</span>{% endif %}
+</div>
+<div class="comment-footer">
+    <div class="comment-meta-left">
+        <span class="ms-icon platform-icon" title="{{ c.device_title }}">{{ c.device_icon }}</span>
+        <span data-date="{{ c.date }}">{{ c.date_fallback }}</span>
+    </div>
+    {% include "vote_capsule.html" %}
+</div>

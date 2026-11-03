@@ -1,0 +1,11 @@
+<div class="vote-capsule {{ c.state_class }}" data-vote-capsule="{{ c.id }}" data-vote="{{ c.user_vote }}" data-score="{{ c.score }}">
+    <button type="button" class="vote-btn up" hx-post="/fragments/comments/{{ c.id }}/vote?dir=up" hx-target="closest .vote-capsule" hx-swap="outerHTML" title="upvote">
+        <span class="ms-icon">thumb_up</span>
+        <span class="expanded-score">{{ c.score }}</span>
+    </button>
+    <span class="vote-score-center">{{ c.score }}</span>
+    <button type="button" class="vote-btn down" hx-post="/fragments/comments/{{ c.id }}/vote?dir=down" hx-target="closest .vote-capsule" hx-swap="outerHTML" title="downvote">
+        <span class="ms-icon">thumb_down</span>
+        <span class="expanded-score">{{ c.score }}</span>
+    </button>
+</div>

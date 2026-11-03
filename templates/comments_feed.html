@@ -1,0 +1,15 @@
+{% for c in comments %}
+<div class="comment-card rimmed-card">{% include "comment_card.html" %}</div>
+{% endfor %}
+<div id="commentsPager" class="comments-pager{% if page > 1 %}{% if page < pages %} both{% else %} only-prev{% endif %}{% else %} only-next{% endif %}">
+    {% if page > 1 %}
+    <button type="button" class="comments-pager-btn rimmed-btn" data-page="{{ page - 1 }}" title="previous page">
+        <span class="ms-icon">chevron_left</span>
+    </button>
+    {% endif %}
+    {% if page < pages %}
+    <button type="button" class="comments-pager-btn rimmed-btn" data-page="{{ page + 1 }}" title="next page">
+        <span class="ms-icon">chevron_right</span>
+    </button>
+    {% endif %}
+</div>

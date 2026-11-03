@@ -1,0 +1,9 @@
+/target
+/data/*.db
+/data/*.redb
+config.kdl
+web/static/**/*.br
+web/static/**/*.gz
+*.Zone.Identifier
+/bin/
+/data/

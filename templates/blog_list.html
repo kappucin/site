@@ -1,0 +1,24 @@
+<div id="blogListView">
+    <div class="newspaper-sheet rimmed-card">
+        {% match lead %}{% when Some with (p) %}
+        <article class="newspaper-lead" role="button" tabindex="0" hx-get="/fragments/post/{{ p.id }}" hx-target="#blogViewSlot" hx-swap="innerHTML">
+            <div class="newspaper-lead-head">
+                <h2 class="newspaper-lead-title">{{ p.title }}</h2>
+                <span class="mono-tag" data-date="{{ p.date }}">{{ p.date_fallback }}</span>
+            </div>
+            <div class="newspaper-lead-body">{{ p.html|safe }}</div>
+        </article>
+        {% when None %}{% endmatch %}
+        <div class="newspaper-columns">
+            {% for p in rest %}
+            <article class="newspaper-article" role="button" tabindex="0" hx-get="/fragments/post/{{ p.id }}" hx-target="#blogViewSlot" hx-swap="innerHTML">
+                <div>
+                    <h3 class="newspaper-art-title">{{ p.title }}</h3>
+                    <p class="newspaper-art-snippet">{{ p.snippet|safe }}</p>
+                </div>
+                <div class="newspaper-art-date" data-date="{{ p.date }}">{{ p.date_fallback }}</div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</div>
